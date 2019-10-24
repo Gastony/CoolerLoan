@@ -453,17 +453,21 @@ public class Home extends javax.swing.JFrame {
 
     private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
         // TODO add your handling code here:
+        this.dispose();
         new Home_Data().show();
     }//GEN-LAST:event_jPanel4MousePressed
 
     private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
         // TODO add your handling code here:
         //just a sample.
+        
+        this.dispose();
         new Pending().show();
     }//GEN-LAST:event_jPanel5MousePressed
 
     private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
         // TODO add your handling code here:
+        this.dispose();
         new Approved().show();
     }//GEN-LAST:event_jPanel6MousePressed
 
@@ -474,6 +478,7 @@ public class Home extends javax.swing.JFrame {
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         // TODO add your handling code here:
+        this.dispose();
         new Reports().show();
     }//GEN-LAST:event_jPanel3MouseClicked
 
@@ -484,6 +489,7 @@ public class Home extends javax.swing.JFrame {
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
         // TODO add your handling code here:
+        this.dispose();
         new Update().show();
     }//GEN-LAST:event_jPanel7MouseClicked
 
