@@ -1,6 +1,10 @@
 
 package main;
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Gastone
@@ -13,7 +17,9 @@ public class Approved extends javax.swing.JFrame {
     public Approved() {
         initComponents();
     }
-
+    
+   
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,6 +35,7 @@ public class Approved extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 153));
+        setPreferredSize(new java.awt.Dimension(900, 700));
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 0));
 

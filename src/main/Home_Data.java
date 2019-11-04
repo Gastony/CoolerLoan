@@ -10,12 +10,15 @@ package main;
  * @author proxc
  */
 public class Home_Data extends javax.swing.JFrame {
+    
 
     /**
+     * 
      * Creates new form Home_Data
      */
     public Home_Data() {
         initComponents();
+        pack();
     }
 
     /**
@@ -33,6 +36,7 @@ public class Home_Data extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 153));
+        setPreferredSize(new java.awt.Dimension(900, 700));
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 0));
 
