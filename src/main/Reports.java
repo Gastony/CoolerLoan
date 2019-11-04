@@ -21,8 +21,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 import javax.xml.crypto.Data;
 import net.proteanit.sql.DbUtils;
 
@@ -32,12 +34,50 @@ import net.proteanit.sql.DbUtils;
  */
 public class Reports extends javax.swing.JFrame {
 
+ public void Test2 () {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn;
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
+            Statement stmt = (Statement) conn.createStatement();
+            String query = "Select customer_id,customer_name, outlet_name from customer";
+            ResultSet rs = stmt.executeQuery(query);
+
+            rs.beforeFirst();
+            String[] columnNames = {"ID", "NAME", "OUTLET"};
+DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+
+            while (rs.next()) {
+    String Id = rs.getString(1);
+    String customer = rs.getString(2);
+    String outlet = rs.getString(3);
+
+    // create a single array of one row's worth of data
+    String[] data = { Id, customer, outlet } ;
+
+    // and add this row of data into the table model
+    tableModel.addRow(data);
+}
+
+tab = new JTable(tableModel);
+
+           tab.setPreferredScrollableViewportSize(new Dimension(450, 63));
+            tab.setFillsViewportHeight(true);
+             tab.setVisible(true);
+            tab.validate();
+            conn.close();
+        }
+        catch (Exception er) {System.err.println(er);}
+    }   
+    
     public Reports() {
         initComponents();
         //con = Data.ConnectDb(); 
        
         //con = sql_connect.ConnercrDB();
     }
+    
    
 
     /**
@@ -55,7 +95,7 @@ public class Reports extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         tab = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -113,19 +153,19 @@ public class Reports extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(255, 0, 0));
         jButton5.setText("Contracts");
 
-        tab.setAutoCreateRowSorter(true);
         tab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3"
             }
         ));
-        jScrollPane1.setViewportView(tab);
+        tab.setName("tab"); // NOI18N
+        jScrollPane2.setViewportView(tab);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,7 +180,8 @@ public class Reports extends javax.swing.JFrame {
                         .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +195,7 @@ public class Reports extends javax.swing.JFrame {
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -162,6 +203,7 @@ public class Reports extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+Test2();
 
 
         // TODO add your handling code here:
@@ -176,18 +218,7 @@ new Home().show();        // TODO add your handling code here:
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select customer_id,customer_name,outlet_name,street from customer");
-            while(rs.next())
-                System.out.println(rs.getInt(1)+" " + rs.getString(2)+" " + rs.getString(3)+" " +rs.getString(4));
-            con.close();
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
+        
         
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -227,7 +258,7 @@ new Home().show();        // TODO add your handling code here:
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tab;
     // End of variables declaration//GEN-END:variables
 }
