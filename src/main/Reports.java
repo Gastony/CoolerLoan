@@ -5,11 +5,14 @@
  */
 package main;
 
+import com.github.vsspt.excel.impl.ExcelExporter;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.*;
 import java.util.Vector;
 import javax.persistence.Table;
@@ -24,6 +27,9 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.crypto.Data;
 import net.proteanit.sql.DbUtils;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 /**
  *
@@ -53,6 +59,7 @@ public class Reports extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -79,6 +86,14 @@ public class Reports extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setForeground(new java.awt.Color(255, 0, 0));
+        jButton2.setText("Export");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -90,6 +105,9 @@ public class Reports extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton2))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,7 +115,8 @@ public class Reports extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel15)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jButton2))
         );
 
         jButton3.setBackground(new java.awt.Color(255, 0, 0));
@@ -210,6 +229,57 @@ this.dispose();
 new Home().show();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+ try 
+            {
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
+                String query="SELECT customer_id,Customer_name,outlet_name,street,location,id_number FROM customer ";
+                PreparedStatement pst=con.prepareStatement(query);
+                ResultSet rs = pst.executeQuery();
+ResultSetMetaData rsmd = rs.getMetaData();
+int columnCount = rsmd.getColumnCount();
+
+HSSFWorkbook wb = new HSSFWorkbook();
+HSSFSheet sheet = wb.createSheet("Customer info");
+HSSFRow rowhead = sheet.createRow(0);
+
+DefaultTableModel model = new DefaultTableModel();
+for (int col = 0; col < columnCount; col++) {
+    String columnName = rsmd.getColumnName(col + 1);
+    model.addColumn(columnName);
+    rowhead.createCell(col).setCellValue(columnName);
+}
+
+int index = 1;
+while (rs.next()) {
+    Vector tableRow = new Vector(columnCount);
+    HSSFRow row = sheet.createRow(index);
+    for (int col = 0; col < columnCount; col++) {
+        Object value = rs.getObject(col + 1);
+        if (value instanceof Integer) {
+            row.createCell(col).setCellValue((int) value);
+            tableRow.add((int) value);
+        } else {
+            row.createCell(col).setCellValue(value.toString());
+            tableRow.add(value.toString());
+        }
+    }
+    model.addRow(tableRow);
+} 
+
+                    FileOutputStream fileOut = new FileOutputStream("client.xls");
+                    wb.write(fileOut);
+                    fileOut.close();
+                    System.out.println("Data is saved in excel file.");
+                 }
+                catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -251,6 +321,7 @@ new Home().show();        // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

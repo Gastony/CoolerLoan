@@ -1,7 +1,10 @@
 
 package main;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javafx.scene.paint.Color;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -9,10 +12,7 @@ import javax.swing.JPanel;
  * @author proxc
  */
 public class Home extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Home
-     */
+     
     public Home() {
         initComponents();
     }
@@ -61,7 +61,6 @@ public class Home extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 153));
         jPanel1.setMinimumSize(new java.awt.Dimension(860, 600));
-        jPanel1.setPreferredSize(new java.awt.Dimension(854, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 0, 0));
@@ -370,11 +369,11 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
