@@ -1,22 +1,84 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main;
+import com.github.vsspt.excel.impl.ExcelExporter;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.sql.*;
+import java.util.Vector;
+import javax.persistence.Table;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.Data;
+import net.proteanit.sql.DbUtils;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 /**
  *
  * @author proxc
  */
 public class Pending extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form Home_Data
      */
     public Pending() {
         initComponents();
+        try {
+    Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT next_to,route_id,sales_rep_id,request_date,outlet_id FROM loan_coooler where approved_by_asm =0 OR approved_by_rsm=0");
+            
+            // get columns info
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            
+            // for changing column and row model
+            DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
+            
+            // clear existing columns 
+            tm.setColumnCount(0);
+            
+            // add specified columns to table
+            for (int i = 1; i <= columnCount; i++ ) {
+                tm.addColumn(rsmd.getColumnName(i));
+            }               
+                
+            // clear existing rows
+            tm.setRowCount(0);
+            
+            // add rows to table
+            while (rs.next()) {
+                String[] a = new String[columnCount];
+                for(int i = 0; i < columnCount; i++) {
+                    a[i] = rs.getString(i+1);
+                }
+                tm.addRow(a);
+            }
+            tm.fireTableDataChanged();
+            
+            // Close ResultSet and Statement
+            rs.close();
+            
+        } catch (Exception ex) { 
+            JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
+        }
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,6 +92,8 @@ public class Pending extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 153));
@@ -72,17 +136,29 @@ public class Pending extends javax.swing.JFrame {
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 402, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,11 +203,14 @@ new Home().show();// TODO add your handling code here:
                 new Pending().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

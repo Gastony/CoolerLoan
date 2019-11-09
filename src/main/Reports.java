@@ -13,6 +13,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.sql.*;
 import java.util.Vector;
 import javax.persistence.Table;
@@ -25,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.xml.crypto.Data;
 import net.proteanit.sql.DbUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -40,10 +42,12 @@ public class Reports extends javax.swing.JFrame {
     
     public Reports() {
         initComponents();
+        
         //con = Data.ConnectDb(); 
        
         //con = sql_connect.ConnercrDB();
     }
+    
     
    
 
@@ -182,7 +186,7 @@ try {
     Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT customer_id,Customer_name,outlet_name,street,location,id_number FROM customer ");
+            ResultSet rs = stmt.executeQuery("SELECT customer_id,Customer_name,outlet_name,outlet_id,street,location,id_number FROM customer ");
             
             // get columns info
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -230,10 +234,11 @@ new Home().show();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- try 
+ 
+        try 
             {
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
-                String query="SELECT customer_id,Customer_name,outlet_name,street,location,id_number FROM customer ";
+                String query="SELECT customer_id,Customer_name,outlet_name,outlet_id,street,location,id_number FROM customer ";
                 PreparedStatement pst=con.prepareStatement(query);
                 ResultSet rs = pst.executeQuery();
 ResultSetMetaData rsmd = rs.getMetaData();
@@ -263,8 +268,9 @@ while (rs.next()) {
             row.createCell(col).setCellValue(value.toString());
             tableRow.add(value.toString());
         }
+        model.addRow(tableRow);
     }
-    model.addRow(tableRow);
+    
 } 
 
                     FileOutputStream fileOut = new FileOutputStream("client.xls");
