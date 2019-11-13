@@ -10,12 +10,16 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
+import java.text.MessageFormat;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Table;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -58,6 +62,7 @@ public class Newreport extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Export_jButton = new javax.swing.JButton();
+        Print_jButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         customer_jButton = new javax.swing.JButton();
         cooler_jButton = new javax.swing.JButton();
@@ -76,6 +81,13 @@ public class Newreport extends javax.swing.JPanel {
             }
         });
 
+        Print_jButton.setText("Print");
+        Print_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Print_jButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -86,6 +98,8 @@ public class Newreport extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Print_jButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Export_jButton))
         );
         jPanel1Layout.setVerticalGroup(
@@ -94,7 +108,9 @@ public class Newreport extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(Export_jButton))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Export_jButton)
+                    .addComponent(Print_jButton)))
         );
 
         customer_jButton.setText("Customer info");
@@ -175,7 +191,7 @@ try {
     Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT customer.customer_id,customer.Customer_name,customer.id_number,outlet.outlet_name,outlet.location FROM customer INNER JOIN outlet ON customer.customer_id = outlet.customer_id");
+            ResultSet rs = stmt.executeQuery("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler");
             
             // get columns info
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -218,7 +234,7 @@ try {
     Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT Serial_number,Cooler_Desc,Cooler_Type FROM cooler ");
+            ResultSet rs = stmt.executeQuery("SELECT cooler_id,cooler_serialno,cooler_description,Cooler_type_id FROM coolers ");
             
             // get columns info
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -266,13 +282,23 @@ try {
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet worksheet = workbook.createSheet("Customer Info");
             Row row1 = worksheet.createRow((short)0);
-            row1.createCell(0).setCellValue("Customer ID");
-            row1.createCell(1).setCellValue("Customer Name");
-             row1.createCell(2).setCellValue("ID Number");
-              row1.createCell(3).setCellValue("Outlet Name");
-               row1.createCell(4).setCellValue("Location");
+            row1.createCell(0).setCellValue("Document No");
+            row1.createCell(1).setCellValue("Contract No");
+             row1.createCell(2).setCellValue("Outlet Name");
+              row1.createCell(3).setCellValue("Outlet Owner Name");
+               row1.createCell(4).setCellValue("Location/Area");
+                  row1.createCell(5).setCellValue("Street");
+            row1.createCell(6).setCellValue("To/Next to");
+             row1.createCell(7).setCellValue("Route Name");
+              row1.createCell(8).setCellValue("Empties");
+               row1.createCell(9).setCellValue("Order(twice cooler capacity)");
+                  row1.createCell(10).setCellValue("Salesman Name");
+            row1.createCell(11).setCellValue("Motivation");
+             row1.createCell(12).setCellValue("Approved by ASM");
+              row1.createCell(13).setCellValue("Approved by RSM");
+              
             Row row2 ;
-            ResultSet rs = statement.executeQuery("SELECT customer.customer_id,customer.Customer_name,customer.id_number,outlet.outlet_name,outlet.location FROM customer INNER JOIN outlet ON customer.customer_id = outlet.customer_id");
+            ResultSet rs = statement.executeQuery("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler");
             while(rs.next()){
                 int a = rs.getRow();
                 row2 = worksheet.createRow((short)a);
@@ -281,6 +307,16 @@ try {
                 row2.createCell(2).setCellValue(rs.getString(3));
                 row2.createCell(3).setCellValue(rs.getString(4));
                 row2.createCell(4).setCellValue(rs.getString(5));
+                row2.createCell(5).setCellValue(rs.getString(6));
+                row2.createCell(6).setCellValue(rs.getString(7));
+                row2.createCell(7).setCellValue(rs.getString(8));
+                row2.createCell(8).setCellValue(rs.getString(9));
+                row2.createCell(9).setCellValue(rs.getString(10));
+                row2.createCell(10).setCellValue(rs.getString(11));
+                row2.createCell(11).setCellValue(rs.getString(12));
+                row2.createCell(12).setCellValue(rs.getString(13));
+                row2.createCell(13).setCellValue(rs.getString(14));
+                
             }
             workbook.write(fileOut);
             fileOut.flush();
@@ -298,9 +334,22 @@ try {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_Export_jButtonActionPerformed
 
+    private void Print_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Print_jButtonActionPerformed
+ MessageFormat header = new MessageFormat("Print Report");
+        MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+    try {
+        jTable1.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+    } 
+    catch (java.awt.print.PrinterAbortException e) {
+    }   catch (PrinterException ex) {
+            Logger.getLogger(Newreport.class.getName()).log(Level.SEVERE, null, ex);
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_Print_jButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Export_jButton;
+    private javax.swing.JButton Print_jButton;
     private javax.swing.JButton contract_jButton;
     private javax.swing.JButton cooler_jButton;
     private javax.swing.JButton customer_jButton;

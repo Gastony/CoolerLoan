@@ -26,14 +26,15 @@ public class CustomerSearch extends javax.swing.JPanel {
      */
     public CustomerSearch() {
         initComponents();
-   try {
-                 Home h = new Home();
- String str = h.Search_jTextField.getText(); 
+ try {
+                 
+ String str = new Home().searchtext(); 
+ System.out.println(str);
     Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
             
-            PreparedStatement stmt = con.prepareStatement("SELECT customer.customer_id,customer.Customer_name,customer.id_number,outlet.outlet_name,outlet.location FROM customer INNER JOIN outlet ON customer.customer_id = outlet.customer_id where Customer_name= ?");
-stmt.setString(1, str); 
+ PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner=?");
+ stmt.setString(1, str); 
 
             ResultSet rs = stmt.executeQuery();
             

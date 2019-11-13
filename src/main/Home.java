@@ -4,6 +4,13 @@ package main;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -24,7 +31,15 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
-    }
+        
+
+
+}
+     public String searchtext(){
+             String str = Search_jTextField.getText(); 
+             return str;
+         }
+    
 
     Home(CustomerSearch aThis) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -71,7 +86,6 @@ public class Home extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Wide Latin", 2, 12)); // NOI18N
         jLabel2.setText("APPLICATION FOR A LOAN COOLER");
 
-        Search_jTextField.setText("Search by name");
         Search_jTextField.setToolTipText("SEARCH BY NAME");
         Search_jTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,11 +274,16 @@ NewJPanel pending = new NewJPanel();
     }//GEN-LAST:event_Home_jButton1ActionPerformed
 
     private void Home_jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButton2ActionPerformed
-        // TODO add your handling code here:
+Approved2 approved = new Approved2();
+        Data_jPanel.setBackground(Color.red);
+       jSplitPane1.setRightComponent( approved);        // TODO add your handling code here:
     }//GEN-LAST:event_Home_jButton2ActionPerformed
 
     private void Home_jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButton3ActionPerformed
-        // TODO add your handling code here:
+
+Update2 update = new Update2();
+        Data_jPanel.setBackground(Color.red);
+       jSplitPane1.setRightComponent( update);        // TODO add your handling code here:
     }//GEN-LAST:event_Home_jButton3ActionPerformed
 
     private void Home_jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButton4ActionPerformed
