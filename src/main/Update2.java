@@ -9,7 +9,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -82,6 +85,7 @@ public class Update2 extends javax.swing.JPanel {
         OutletNumber_jTextField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         CoolerAssetnumber_jTextField = new javax.swing.JTextField();
+        Update_jComboBox = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Customer Name");
 
@@ -126,6 +130,12 @@ public class Update2 extends javax.swing.JPanel {
 
         jLabel10.setText("Cooler Asset Number");
 
+        Update_jComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Update_jComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,18 +143,23 @@ public class Update2 extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel10))
-                        .addGap(88, 88, 88)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel1)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(85, 85, 85)
+                                .addComponent(Update_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(78, 78, 78)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(Location_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,7 +188,9 @@ public class Update2 extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
+                .addGap(32, 32, 32)
+                .addComponent(Update_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addComponent(OutletName_jLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -287,6 +304,25 @@ stmt2.setString(5, str);
         // TODO add your handling code here:
     }//GEN-LAST:event_Update_jButtonActionPerformed
 
+    private void Update_jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_jComboBoxActionPerformed
+    try {
+    Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT outlet_owner FROM loan_coooler");
+        while(rs.next()) { 
+        String customer = rs.getString("outlet_owner");
+       Update_jComboBox.addItem(customer);
+        
+        
+    }
+            rs.close();
+            
+        } catch (Exception ex) { 
+            JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_Update_jComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CoolerAssetnumber_jTextField;
@@ -300,6 +336,7 @@ stmt2.setString(5, str);
     private javax.swing.JTextField OutletTag_jTextField;
     private javax.swing.JTextField Serial_jTextField;
     private javax.swing.JButton Update_jButton;
+    private javax.swing.JComboBox<String> Update_jComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
