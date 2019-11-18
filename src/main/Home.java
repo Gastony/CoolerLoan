@@ -2,6 +2,7 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -11,7 +12,10 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.IOException;
+import javax.swing.JPanel;
 
 
 /*
@@ -26,10 +30,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Home extends javax.swing.JFrame {
 
-   /**
-     * Creates new form NewJFrame
-     */
     public Home() {
+        
         initComponents();
         
 
@@ -74,6 +76,8 @@ public class Home extends javax.swing.JFrame {
         Data_jPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cocacola");
+        setExtendedState(6);
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 0));
 
@@ -81,6 +85,7 @@ public class Home extends javax.swing.JFrame {
         bindingGroup.addBinding(binding);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("COCA-COLA KWANZA LIMITED");
 
         jLabel2.setFont(new java.awt.Font("Wide Latin", 2, 12)); // NOI18N
@@ -110,12 +115,12 @@ public class Home extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Search_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Search_jButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Search_jButton))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +142,7 @@ public class Home extends javax.swing.JFrame {
         );
 
         Home_jButton.setBackground(new java.awt.Color(255, 0, 0));
-        Home_jButton.setText("HOME");
+        Home_jButton.setText("ORDERS");
         Home_jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Home_jButtonActionPerformed(evt);
@@ -219,16 +224,7 @@ public class Home extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(Button_jPanel);
 
-        javax.swing.GroupLayout Data_jPanelLayout = new javax.swing.GroupLayout(Data_jPanel);
-        Data_jPanel.setLayout(Data_jPanelLayout);
-        Data_jPanelLayout.setHorizontalGroup(
-            Data_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
-        );
-        Data_jPanelLayout.setVerticalGroup(
-            Data_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
-        );
+        Data_jPanel.setLayout(null);
 
         jSplitPane1.setRightComponent(Data_jPanel);
 
@@ -245,7 +241,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -258,7 +254,9 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_Search_jTextFieldActionPerformed
 
     private void Home_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButtonActionPerformed
-        // TODO add your handling code here:
+     Orders order = new Orders();
+        Data_jPanel.setBackground(Color.red);
+       jSplitPane1.setRightComponent( order);   // TODO add your handling code here:
     }//GEN-LAST:event_Home_jButtonActionPerformed
 
     private void Home_jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButton1ActionPerformed
@@ -305,6 +303,7 @@ CustomerSearch search = new CustomerSearch();
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -329,7 +328,7 @@ CustomerSearch search = new CustomerSearch();
             java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+new Home();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -337,6 +336,7 @@ CustomerSearch search = new CustomerSearch();
             }
         });
     }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Button_jPanel;
