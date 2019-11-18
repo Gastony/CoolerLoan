@@ -31,9 +31,9 @@ import javax.swing.JPanel;
 public class Home extends javax.swing.JFrame {
 
     public Home() {
-        
+       
         initComponents();
-        
+        //setBackground(new Color(0,0,0,0));
 
 
 }
@@ -65,6 +65,7 @@ public class Home extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         Search_jTextField = new javax.swing.JTextField();
         Search_jButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jSplitPane1 = new javax.swing.JSplitPane();
         Button_jPanel = new javax.swing.JPanel();
         Home_jButton = new javax.swing.JButton();
@@ -78,6 +79,7 @@ public class Home extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cocacola");
         setExtendedState(6);
+        setIconImages(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 0));
 
@@ -89,7 +91,7 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setText("COCA-COLA KWANZA LIMITED");
 
         jLabel2.setFont(new java.awt.Font("Wide Latin", 2, 12)); // NOI18N
-        jLabel2.setText("APPLICATION FOR A LOAN COOLER");
+        jLabel2.setText("COOLER DELIVERY AND COLLECTION");
 
         Search_jTextField.setToolTipText("SEARCH BY NAME");
         Search_jTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -105,12 +107,16 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/logo.PNG"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logo_Label)
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,26 +126,31 @@ public class Home extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Search_jButton))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(logo_Label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Search_jButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(Search_jTextField)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Search_jButton)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(Search_jTextField)))))
                 .addContainerGap())
         );
+
+        Button_jPanel.setBackground(new java.awt.Color(0, 0, 51));
 
         Home_jButton.setBackground(new java.awt.Color(255, 0, 0));
         Home_jButton.setText("ORDERS");
@@ -199,9 +210,9 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(Home_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Home_jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addComponent(Home_jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                    .addComponent(Home_jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addComponent(Home_jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                    .addComponent(Home_jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+                    .addComponent(Home_jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                    .addComponent(Home_jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         Button_jPanelLayout.setVerticalGroup(
@@ -210,7 +221,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Home_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Home_jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                .addComponent(Home_jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(Home_jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -225,7 +236,6 @@ public class Home extends javax.swing.JFrame {
         jSplitPane1.setLeftComponent(Button_jPanel);
 
         Data_jPanel.setLayout(null);
-
         jSplitPane1.setRightComponent(Data_jPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -240,8 +250,8 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 27, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -259,27 +269,15 @@ public class Home extends javax.swing.JFrame {
        jSplitPane1.setRightComponent( order);   // TODO add your handling code here:
     }//GEN-LAST:event_Home_jButtonActionPerformed
 
-    private void Home_jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButton1ActionPerformed
-NewJPanel pending = new NewJPanel();
-        Data_jPanel.setBackground(Color.red);
-       jSplitPane1.setRightComponent( pending);
-       
-
-// Code of sub-components - not shown here
-
-// Layout setup code - not shown here
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Home_jButton1ActionPerformed
-
     private void Home_jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButton2ActionPerformed
-Approved2 approved = new Approved2();
+Approved approved = new Approved();
         Data_jPanel.setBackground(Color.red);
        jSplitPane1.setRightComponent( approved);        // TODO add your handling code here:
     }//GEN-LAST:event_Home_jButton2ActionPerformed
 
     private void Home_jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButton3ActionPerformed
 
-Update2 update = new Update2();
+Update update = new Update();
         Data_jPanel.setBackground(Color.red);
        jSplitPane1.setRightComponent( update);        // TODO add your handling code here:
     }//GEN-LAST:event_Home_jButton3ActionPerformed
@@ -300,6 +298,17 @@ CustomerSearch search = new CustomerSearch();
         Data_jPanel.setBackground(Color.red);
        jSplitPane1.setRightComponent( search);       // TODO add your handling code here:
     }//GEN-LAST:event_Search_jButtonActionPerformed
+
+    private void Home_jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButton1ActionPerformed
+        Pending pending = new Pending();
+        Data_jPanel.setBackground(Color.red);
+        jSplitPane1.setRightComponent( pending);
+
+        // Code of sub-components - not shown here
+
+        // Layout setup code - not shown here
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Home_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -351,6 +360,7 @@ new Home();
     public javax.swing.JTextField Search_jTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel logo_Label;
