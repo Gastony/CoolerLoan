@@ -4,36 +4,16 @@
  * and open the template in the editor.
  */
 package main;
-import com.github.vsspt.excel.impl.ExcelExporter;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.print.PrinterException;
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.text.MessageFormat;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.Table;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.xml.crypto.Data;
-import net.proteanit.sql.DbUtils;
-import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -41,12 +21,10 @@ import org.apache.poi.ss.usermodel.Row;
  *
  * @author RTM
  */
-public class Newreport extends javax.swing.JPanel {
+public class Reports extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Newreport
-     */
-    public Newreport() {
+  
+    public Reports() {
         initComponents();
     }
 
@@ -60,7 +38,6 @@ public class Newreport extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         Export_jButton = new javax.swing.JButton();
         Print_jButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -71,8 +48,6 @@ public class Newreport extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 0));
-
-        jLabel1.setText("REPORTS");
 
         Export_jButton.setText("Export");
         Export_jButton.addActionListener(new java.awt.event.ActionListener() {
@@ -92,25 +67,21 @@ public class Newreport extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(307, 307, 307)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Print_jButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Export_jButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Export_jButton)
+                .addGap(14, 14, 14))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Export_jButton)
-                    .addComponent(Print_jButton)))
+                    .addComponent(Print_jButton)
+                    .addComponent(Export_jButton))
+                .addGap(26, 26, 26))
         );
 
         customer_jButton.setText("Customer info");
@@ -147,7 +118,7 @@ public class Newreport extends javax.swing.JPanel {
                 .addComponent(customer_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(cooler_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(502, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(161, 161, 161)
@@ -178,11 +149,14 @@ public class Newreport extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -274,8 +248,8 @@ try {
 
     private void Export_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_jButtonActionPerformed
  try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
+ 
+            Connection con = DBConn.myConn();
             Statement statement = con.createStatement();
             FileOutputStream fileOut;
             fileOut = new FileOutputStream("CUSTOMER.xls");
@@ -325,8 +299,6 @@ try {
             statement.close();
             con.close();
             System.out.println("Export Success");
-        }catch(ClassNotFoundException e){
-            System.out.println(e);
         }catch(SQLException ex){
             System.out.println(ex);
         }catch(IOException ioe){
@@ -342,7 +314,7 @@ try {
     } 
     catch (java.awt.print.PrinterAbortException e) {
     }   catch (PrinterException ex) {
-            Logger.getLogger(Newreport.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
         } // TODO add your handling code here:
     }//GEN-LAST:event_Print_jButtonActionPerformed
 
@@ -353,7 +325,6 @@ try {
     private javax.swing.JButton contract_jButton;
     private javax.swing.JButton cooler_jButton;
     private javax.swing.JButton customer_jButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

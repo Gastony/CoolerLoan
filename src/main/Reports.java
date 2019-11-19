@@ -4,52 +4,29 @@
  * and open the template in the editor.
  */
 package main;
-
-import com.github.vsspt.excel.impl.ExcelExporter;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.io.File;
+import java.awt.print.PrinterException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
-import java.util.Vector;
-import javax.persistence.Table;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.text.MessageFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.xml.crypto.Data;
-import net.proteanit.sql.DbUtils;
-import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-
+import org.apache.poi.ss.usermodel.Row;
 /**
  *
  * @author RTM
  */
-public class Reports extends javax.swing.JFrame {
-         
-    
+public class Reports extends javax.swing.JPanel {
+
+  
     public Reports() {
         initComponents();
-        
-        //con = Data.ConnectDb(); 
-       
-        //con = sql_connect.ConnercrDB();
     }
-    
-    
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,81 +38,88 @@ public class Reports extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        Export_jButton = new javax.swing.JButton();
+        Print_jButton = new javax.swing.JButton();
+        customer_jButton = new javax.swing.JButton();
+        cooler_jButton = new javax.swing.JButton();
+        contract_jButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 153, 153));
-        setPreferredSize(new java.awt.Dimension(900, 700));
-
         jPanel1.setBackground(new java.awt.Color(255, 0, 0));
 
-        jLabel15.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/download_52px.png"))); // NOI18N
-        jLabel15.setText("Reports");
-
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/backbtn.PNG"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Export_jButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/export.png"))); // NOI18N
+        Export_jButton.setText("Export");
+        Export_jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Export_jButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setForeground(new java.awt.Color(255, 0, 0));
-        jButton2.setText("Export");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Print_jButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/Printer-16.png"))); // NOI18N
+        Print_jButton.setText("Print");
+        Print_jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Print_jButtonActionPerformed(evt);
             }
         });
+
+        customer_jButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/customer_person.png"))); // NOI18N
+        customer_jButton.setText("Customer info");
+        customer_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customer_jButtonActionPerformed(evt);
+            }
+        });
+
+        cooler_jButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/cooler0.png"))); // NOI18N
+        cooler_jButton.setText("Cooler Type");
+        cooler_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cooler_jButtonActionPerformed(evt);
+            }
+        });
+
+        contract_jButton.setText("Contracts");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jLabel15)
-                .addContainerGap(615, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2))
+                .addContainerGap()
+                .addComponent(customer_jButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cooler_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(contract_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+                .addComponent(Print_jButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Export_jButton)
+                .addGap(14, 14, 14))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jButton2))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(contract_jButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cooler_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(customer_jButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Print_jButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Export_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-
-        jButton3.setBackground(new java.awt.Color(255, 0, 0));
-        jButton3.setText("Customer info");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setBackground(new java.awt.Color(255, 0, 0));
-        jButton4.setText("Cooler Type");
-
-        jButton5.setBackground(new java.awt.Color(255, 0, 0));
-        jButton5.setText("Contracts");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,48 +129,33 @@ public class Reports extends javax.swing.JFrame {
 
             }
         ));
+        jTable1.setOpaque(false);
         jScrollPane1.setViewportView(jTable1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void customer_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customer_jButtonActionPerformed
 try {
     Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT customer_id,Customer_name,outlet_name,outlet_id,street,location,id_number FROM customer ");
+            ResultSet rs = stmt.executeQuery("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler");
             
             // get columns info
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -221,117 +190,131 @@ try {
             
         } catch (Exception ex) { 
             JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
-        }
-                                            
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_customer_jButtonActionPerformed
 
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-this.dispose();
-new Home().show();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- 
-        try 
-            {
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
-                String query="SELECT customer_id,Customer_name,outlet_name,outlet_id,street,location,id_number FROM customer ";
-                PreparedStatement pst=con.prepareStatement(query);
-                ResultSet rs = pst.executeQuery();
-ResultSetMetaData rsmd = rs.getMetaData();
-int columnCount = rsmd.getColumnCount();
-
-HSSFWorkbook wb = new HSSFWorkbook();
-HSSFSheet sheet = wb.createSheet("Customer info");
-HSSFRow rowhead = sheet.createRow(0);
-
-DefaultTableModel model = new DefaultTableModel();
-for (int col = 0; col < columnCount; col++) {
-    String columnName = rsmd.getColumnName(col + 1);
-    model.addColumn(columnName);
-    rowhead.createCell(col).setCellValue(columnName);
-}
-
-int index = 1;
-while (rs.next()) {
-    Vector tableRow = new Vector(columnCount);
-    HSSFRow row = sheet.createRow(index);
-    for (int col = 0; col < columnCount; col++) {
-        Object value = rs.getObject(col + 1);
-        if (value instanceof Integer) {
-            row.createCell(col).setCellValue((int) value);
-            tableRow.add((int) value);
-        } else {
-            row.createCell(col).setCellValue(value.toString());
-            tableRow.add(value.toString());
-        }
-        model.addRow(tableRow);
-    }
-    
-} 
-
-                    FileOutputStream fileOut = new FileOutputStream("client.xls");
-                    wb.write(fileOut);
-                    fileOut.close();
-                    System.out.println("Data is saved in excel file.");
-                 }
-                catch (Exception e) 
-            {
-                e.printStackTrace();
-            }
-        
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        
-        
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void cooler_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cooler_jButtonActionPerformed
+try {
+    Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT cooler_id,cooler_serialno,cooler_description,Cooler_type_id FROM coolers ");
+            
+            // get columns info
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            
+            // for changing column and row model
+            DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
+            
+            // clear existing columns 
+            tm.setColumnCount(0);
+            
+            // add specified columns to table
+            for (int i = 1; i <= columnCount; i++ ) {
+                tm.addColumn(rsmd.getColumnName(i));
+            }               
+                
+            // clear existing rows
+            tm.setRowCount(0);
+            
+            // add rows to table
+            while (rs.next()) {
+                String[] a = new String[columnCount];
+                for(int i = 0; i < columnCount; i++) {
+                    a[i] = rs.getString(i+1);
                 }
+                tm.addRow(a);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Reports.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Reports.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Reports.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Reports.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+            tm.fireTableDataChanged();
+            
+            // Close ResultSet and Statement
+            rs.close();
+            
+        } catch (Exception ex) { 
+            JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_cooler_jButtonActionPerformed
 
-        /* Create and display the form */
-       
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Reports().setVisible(true);
+    private void Export_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_jButtonActionPerformed
+ try{
+ 
+            Connection con = DBConn.myConn();
+            Statement statement = con.createStatement();
+            FileOutputStream fileOut;
+            fileOut = new FileOutputStream("CUSTOMER.xls");
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet worksheet = workbook.createSheet("Customer Info");
+            Row row1 = worksheet.createRow((short)0);
+            row1.createCell(0).setCellValue("Document No");
+            row1.createCell(1).setCellValue("Contract No");
+             row1.createCell(2).setCellValue("Outlet Name");
+              row1.createCell(3).setCellValue("Outlet Owner Name");
+               row1.createCell(4).setCellValue("Location/Area");
+                  row1.createCell(5).setCellValue("Street");
+            row1.createCell(6).setCellValue("To/Next to");
+             row1.createCell(7).setCellValue("Route Name");
+              row1.createCell(8).setCellValue("Empties");
+               row1.createCell(9).setCellValue("Order(twice cooler capacity)");
+                  row1.createCell(10).setCellValue("Salesman Name");
+            row1.createCell(11).setCellValue("Motivation");
+             row1.createCell(12).setCellValue("Approved by ASM");
+              row1.createCell(13).setCellValue("Approved by RSM");
+              
+            Row row2 ;
+            ResultSet rs = statement.executeQuery("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler");
+            while(rs.next()){
+                int a = rs.getRow();
+                row2 = worksheet.createRow((short)a);
+                row2.createCell(0).setCellValue(rs.getString(1));
+                row2.createCell(1).setCellValue(rs.getString(2));
+                row2.createCell(2).setCellValue(rs.getString(3));
+                row2.createCell(3).setCellValue(rs.getString(4));
+                row2.createCell(4).setCellValue(rs.getString(5));
+                row2.createCell(5).setCellValue(rs.getString(6));
+                row2.createCell(6).setCellValue(rs.getString(7));
+                row2.createCell(7).setCellValue(rs.getString(8));
+                row2.createCell(8).setCellValue(rs.getString(9));
+                row2.createCell(9).setCellValue(rs.getString(10));
+                row2.createCell(10).setCellValue(rs.getString(11));
+                row2.createCell(11).setCellValue(rs.getString(12));
+                row2.createCell(12).setCellValue(rs.getString(13));
+                row2.createCell(13).setCellValue(rs.getString(14));
                 
             }
-        });
-    }
+            workbook.write(fileOut);
+            fileOut.flush();
+            fileOut.close();
+            rs.close();
+            statement.close();
+            con.close();
+            System.out.println("Export Success");
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }catch(IOException ioe){
+            System.out.println(ioe);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_Export_jButtonActionPerformed
+
+    private void Print_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Print_jButtonActionPerformed
+ MessageFormat header = new MessageFormat("Print Report");
+        MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+    try {
+        jTable1.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+    } 
+    catch (java.awt.print.PrinterAbortException e) {
+    }   catch (PrinterException ex) {
+            Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_Print_jButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel15;
+    private javax.swing.JButton Export_jButton;
+    private javax.swing.JButton Print_jButton;
+    private javax.swing.JButton contract_jButton;
+    private javax.swing.JButton cooler_jButton;
+    private javax.swing.JButton customer_jButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

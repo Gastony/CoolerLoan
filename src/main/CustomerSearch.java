@@ -7,11 +7,9 @@ package main;
 
 import static java.awt.image.ImageObserver.WIDTH;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,8 +28,7 @@ public class CustomerSearch extends javax.swing.JPanel {
                  
  String str = new Home().searchtext(); 
  System.out.println(str);
-    Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
+            Connection con = DBConn.myConn();
             
  PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner=?");
  stmt.setString(1, str); 

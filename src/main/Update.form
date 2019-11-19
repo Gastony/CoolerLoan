@@ -60,24 +60,15 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="CoolerTag_jTextField" min="-2" pref="246" max="-2" attributes="0"/>
-                                              <Component id="Serial_jTextField" min="-2" pref="246" max="-2" attributes="0"/>
-                                              <Component id="CoolerType_jTextField" min="-2" pref="246" max="-2" attributes="0"/>
-                                              <Component id="OutletTag_jTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="711" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="OutletNumber_jTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
-                                              <Component id="Location_jTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
-                                              <Component id="OutletName_jTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="381" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="CoolerTag_jTextField" min="-2" pref="246" max="-2" attributes="0"/>
+                                      <Component id="Serial_jTextField" min="-2" pref="246" max="-2" attributes="0"/>
+                                      <Component id="CoolerType_jTextField" min="-2" pref="246" max="-2" attributes="0"/>
+                                      <Component id="OutletTag_jTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
+                                      <Component id="OutletNumber_jTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
+                                      <Component id="Location_jTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
+                                      <Component id="OutletName_jTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="711" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jLabel8" pref="145" max="32767" attributes="0"/>

@@ -6,13 +6,9 @@
 package main;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,8 +23,8 @@ public class Update extends javax.swing.JPanel {
     public Update() {
         initComponents();
         try {
-    Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
+    
+            Connection con = DBConn.myConn();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT outlet_owner,outlet_name,location FROM loan_coooler");
         if(rs.next()) { 
@@ -281,8 +277,7 @@ public class Update extends javax.swing.JPanel {
         String value5=CoolerAssetnumber_jTextField.getText();
 String value6=Serial_jTextField.getText();
         String str= CustomerName_jTextField.getText();
-    Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
+            Connection con = DBConn.myConn();
             PreparedStatement stmt = con.prepareStatement("UPDATE loan_coooler SET outlet_tag=? ,outlet_number=? WHERE outlet_owner=?");
             stmt.setString(1, value1);
             stmt.setString(2, value2);
@@ -310,8 +305,8 @@ stmt2.setString(5, str);
 
     private void Update_jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_jComboBoxActionPerformed
     try {
-    Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
+ 
+            Connection con = DBConn.myConn();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT outlet_owner FROM loan_coooler");
         while(rs.next()) { 
