@@ -227,7 +227,7 @@
             <Component class="javax.swing.JButton" name="Pending_orders_jButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/main/images/Pending.png"/>
+                  <Image iconType="3" name="/main/images/Pending1.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="PENDING"/>
               </Properties>

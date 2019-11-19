@@ -149,7 +149,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        Pending_orders_jButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/Pending.png"))); // NOI18N
+        Pending_orders_jButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/Pending1.png"))); // NOI18N
         Pending_orders_jButton.setText("PENDING");
         Pending_orders_jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
