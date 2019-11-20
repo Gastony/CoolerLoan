@@ -152,8 +152,8 @@ public class Reports extends javax.swing.JPanel {
 
     private void customer_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customer_jButtonActionPerformed
 try {
-    Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
+   
+            Connection con = DBConn.myConn();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler");
             
@@ -195,8 +195,8 @@ try {
 
     private void cooler_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cooler_jButtonActionPerformed
 try {
-    Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/red_db","root","");
+   
+            Connection con = DBConn.myConn();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT cooler_id,cooler_serialno,cooler_description,Cooler_type_id FROM coolers ");
             

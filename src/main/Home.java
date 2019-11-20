@@ -2,6 +2,12 @@
 package main;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.concurrent.TimeUnit;
+
+
 
 
 /*
@@ -19,10 +25,9 @@ public class Home extends javax.swing.JFrame {
     public Home() {
        
         initComponents();
-        //setBackground(new Color(0,0,0,0));
-
-
-}
+//         Orders order = new Orders();
+//        jSplitPane1.setRightComponent( order);//setBackground(new Color(0,0,0,0));
+    }
      public String searchtext(){
              String str = Search_jTextField.getText(); 
              return str;
@@ -76,7 +81,7 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setText("COCA-COLA KWANZA LIMITED");
 
-        jLabel2.setFont(new java.awt.Font("Wide Latin", 2, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel2.setText("COOLER DELIVERY AND COLLECTION");
 
         Search_jTextField.setToolTipText("SEARCH BY NAME");
@@ -113,7 +118,7 @@ public class Home extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Search_jButton))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,6 +277,7 @@ public class Home extends javax.swing.JFrame {
 Approved approved = new Approved();
         Data_jPanel.setBackground(Color.red);
        jSplitPane1.setRightComponent( approved);        // TODO add your handling code here:
+       
     }//GEN-LAST:event_Approved_orders_jButtonActionPerformed
 
     private void Update_info_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_info_jButtonActionPerformed
@@ -310,7 +316,8 @@ CustomerSearch search = new CustomerSearch();
     }//GEN-LAST:event_Pending_orders_jButtonActionPerformed
 
     private void Declinedl_orders_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Declinedl_orders_jButtonActionPerformed
-        // TODO add your handling code here:
+         Declined declined = new Declined();
+        jSplitPane1.setRightComponent( declined);// TODO add your handling code here:
     }//GEN-LAST:event_Declinedl_orders_jButtonActionPerformed
 
     /**
@@ -341,11 +348,16 @@ CustomerSearch search = new CustomerSearch();
         }
         //</editor-fold>
 new Home();
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Home().setVisible(true);
+                
+                
             }
+            
+            
         });
     }
  
