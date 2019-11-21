@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -269,7 +270,13 @@ public class Update extends javax.swing.JPanel {
     }//GEN-LAST:event_OutletTag_jTextFieldActionPerformed
 
     private void Update_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_jButtonActionPerformed
- try {
+JDialog.setDefaultLookAndFeelDecorated(true);
+		int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		if (response == JOptionPane.NO_OPTION) {
+			System.out.println("No button clicked");
+		} else if (response == JOptionPane.YES_OPTION) {
+			try {
      String value1=OutletTag_jTextField.getText();
         String value2=OutletNumber_jTextField.getText();
         String value3=CoolerTag_jTextField.getText();
@@ -296,10 +303,19 @@ stmt2.setString(5, str);
             System.out.println(rs2+" records affected"); 
              
             con.close();
+          OutletTag_jTextField.setText("");
+        OutletNumber_jTextField.setText("");
+        CoolerTag_jTextField.setText("");
+        CoolerType_jTextField.setText("");
+      CoolerAssetnumber_jTextField.setText("");
+Serial_jTextField.setText("");
             
         } catch (Exception ex) { 
-            JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
+            JOptionPane.showMessageDialog(null, ex, ex.getMessage(), WIDTH, null);
         }
+		} else if (response == JOptionPane.CLOSED_OPTION) {
+			System.out.println("JOptionPane closed");
+		}
         // TODO add your handling code here:
     }//GEN-LAST:event_Update_jButtonActionPerformed
 

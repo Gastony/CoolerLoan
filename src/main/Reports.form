@@ -89,6 +89,8 @@
             <Property name="text" type="java.lang.String" value="Export"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Export_jButtonMouseClicked"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Export_jButtonMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Export_jButtonActionPerformed"/>
           </Events>
         </Component>
@@ -100,6 +102,8 @@
             <Property name="text" type="java.lang.String" value="Print"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Print_jButtonMouseClicked"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Print_jButtonMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Print_jButtonActionPerformed"/>
           </Events>
         </Component>
@@ -111,6 +115,8 @@
             <Property name="text" type="java.lang.String" value="Customer info"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="customer_jButtonMouseClicked"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="customer_jButtonMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="customer_jButtonActionPerformed"/>
           </Events>
         </Component>
@@ -122,6 +128,8 @@
             <Property name="text" type="java.lang.String" value="Cooler Type"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cooler_jButtonMouseClicked"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cooler_jButtonMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cooler_jButtonActionPerformed"/>
           </Events>
         </Component>
@@ -129,6 +137,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Contracts"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="contract_jButtonMouseClicked"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="contract_jButtonMouseExited"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

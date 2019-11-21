@@ -221,6 +221,8 @@
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
               <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="All_orders_jButtonMousePressed"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="All_orders_jButtonMouseReleased"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="All_orders_jButtonActionPerformed"/>
               </Events>
             </Component>
@@ -287,6 +289,8 @@
                 <Property name="text" type="java.lang.String" value="DECLINED"/>
               </Properties>
               <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Declinedl_orders_jButtonMousePressed"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Declinedl_orders_jButtonMouseReleased"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Declinedl_orders_jButtonActionPerformed"/>
               </Events>
             </Component>

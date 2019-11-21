@@ -148,6 +148,14 @@ public class Home extends javax.swing.JFrame {
         All_orders_jButton.setText("ORDERS");
         All_orders_jButton.setBorderPainted(false);
         All_orders_jButton.setOpaque(false);
+        All_orders_jButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                All_orders_jButtonMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                All_orders_jButtonMouseReleased(evt);
+            }
+        });
         All_orders_jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 All_orders_jButtonActionPerformed(evt);
@@ -196,6 +204,14 @@ public class Home extends javax.swing.JFrame {
 
         Declinedl_orders_jButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/declined.gif"))); // NOI18N
         Declinedl_orders_jButton.setText("DECLINED");
+        Declinedl_orders_jButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Declinedl_orders_jButtonMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                Declinedl_orders_jButtonMouseReleased(evt);
+            }
+        });
         Declinedl_orders_jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Declinedl_orders_jButtonActionPerformed(evt);
@@ -319,6 +335,22 @@ CustomerSearch search = new CustomerSearch();
          Declined declined = new Declined();
         jSplitPane1.setRightComponent( declined);// TODO add your handling code here:
     }//GEN-LAST:event_Declinedl_orders_jButtonActionPerformed
+
+    private void All_orders_jButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_All_orders_jButtonMouseReleased
+        All_orders_jButton.setBackground(Color.white);// TODO add your handling code here:
+    }//GEN-LAST:event_All_orders_jButtonMouseReleased
+
+    private void Declinedl_orders_jButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Declinedl_orders_jButtonMouseReleased
+      Declinedl_orders_jButton.setBackground(Color.white);  // TODO add your handling code here:
+    }//GEN-LAST:event_Declinedl_orders_jButtonMouseReleased
+
+    private void All_orders_jButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_All_orders_jButtonMousePressed
+      All_orders_jButton.setBackground(Color.blue);  // TODO add your handling code here:
+    }//GEN-LAST:event_All_orders_jButtonMousePressed
+
+    private void Declinedl_orders_jButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Declinedl_orders_jButtonMousePressed
+       Declinedl_orders_jButton.setBackground(Color.blue);  // TODO add your handling code here:
+    }//GEN-LAST:event_Declinedl_orders_jButtonMousePressed
 
     /**
      * @param args the command line arguments
