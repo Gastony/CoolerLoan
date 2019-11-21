@@ -27,7 +27,7 @@ public class Update extends javax.swing.JPanel {
     
             Connection con = DBConn.myConn();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT outlet_owner,outlet_name,location FROM loan_coooler");
+            ResultSet rs = stmt.executeQuery("SELECT outlet_owner,outlet_name,location FROM loan_coooler where approved_by_asm =1 AND approved_by_rsm=1 AND approved_by_contlr=0");
         if(rs.next()) { 
         String customer = rs.getString("outlet_owner");
         CustomerName_jTextField.setText(customer);
@@ -297,10 +297,14 @@ String value6=Serial_jTextField.getText();
 stmt2.setString(3, value5);
 stmt2.setString(4, value6);
 stmt2.setString(5, str);
+PreparedStatement stmt3 = con.prepareStatement("UPDATE loan_coooler SET approved_by_contlr=1  WHERE  outlet_owner=? ");
+stmt3.setString(1, str);
+   int rs3 = stmt3.executeUpdate();
             
             int rs2 = stmt2.executeUpdate();
             System.out.println(rs+" records affected"); 
             System.out.println(rs2+" records affected"); 
+               System.out.println(rs3+" records affected");
              
             con.close();
           OutletTag_jTextField.setText("");
