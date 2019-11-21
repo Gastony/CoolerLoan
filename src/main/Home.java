@@ -2,10 +2,21 @@
 package main;
 
 import java.awt.Color;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
+
 
 
 
@@ -27,11 +38,13 @@ public class Home extends javax.swing.JFrame {
         initComponents();
 //         Orders order = new Orders();
 //        jSplitPane1.setRightComponent( order);//setBackground(new Color(0,0,0,0));
+
     }
-     public String searchtext(){
-             String str = Search_jTextField.getText(); 
-             return str;
-         }
+    
+//     public String searchtext(){
+//             String str = Search_jTextField.getText(); 
+//             return str;
+//         }
     
 
     Home(CustomerSearch aThis) {
@@ -315,9 +328,60 @@ Reports myreport = new Reports();
     }//GEN-LAST:event_Reports_jButtonActionPerformed
 
     private void Search_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_jButtonActionPerformed
-CustomerSearch search = new CustomerSearch();
-        Data_jPanel.setBackground(Color.red);
-       jSplitPane1.setRightComponent( search);       // TODO add your handling code here:
+//CustomerSearch search = new CustomerSearch();
+//        Data_jPanel.setBackground(Color.red);
+//       jSplitPane1.setRightComponent( search);       
+ try {
+                 
+ 
+
+    
+    JTable jtbl = new JTable();
+    
+    String id = Search_jTextField.getText();
+
+            Connection con = DBConn.myConn();
+            
+ PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner=?");
+ stmt.setString(1, id); 
+
+            ResultSet rs = stmt.executeQuery();
+            
+            // get columns info
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            
+            // for changing column and row model
+            DefaultTableModel tm = (DefaultTableModel) jtbl.getModel();
+            
+            // clear existing columns 
+            tm.setColumnCount(0);
+            
+            // add specified columns to table
+            for (int i = 1; i <= columnCount; i++ ) {
+                tm.addColumn(rsmd.getColumnName(i));
+            }               
+                
+            // clear existing rows
+            tm.setRowCount(0);
+            
+            // add rows to table
+            while (rs.next()) {
+                String[] a = new String[columnCount];
+                for(int i = 0; i < columnCount; i++) {
+                    a[i] = rs.getString(i+1);
+                }
+                tm.addRow(a);
+            }
+            tm.fireTableDataChanged();
+            
+            
+            rs.close();// Close ResultSet and Statement
+           jSplitPane1.setRightComponent(jtbl);
+            
+        } catch (Exception ex) { 
+            JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
+        }
     }//GEN-LAST:event_Search_jButtonActionPerformed
 
     private void Pending_orders_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pending_orders_jButtonActionPerformed

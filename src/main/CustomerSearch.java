@@ -26,12 +26,12 @@ public class CustomerSearch extends javax.swing.JPanel {
         initComponents();
  try {
                  
- String str = new Home().searchtext(); 
- System.out.println(str);
+ //String str = new Home().searchtext(); 
+// System.out.println(str);
             Connection con = DBConn.myConn();
             
  PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner=?");
- stmt.setString(1, str); 
+ //stmt.setString(1, str); 
 
             ResultSet rs = stmt.executeQuery();
             
@@ -109,8 +109,10 @@ public class CustomerSearch extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 
+
+            
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-}
+    }

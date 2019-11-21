@@ -309,7 +309,8 @@ stmt2.setString(5, str);
         CoolerType_jTextField.setText("");
       CoolerAssetnumber_jTextField.setText("");
 Serial_jTextField.setText("");
-            
+    
+     JOptionPane.showMessageDialog(null, "Records successful updated");
         } catch (Exception ex) { 
             JOptionPane.showMessageDialog(null, ex, ex.getMessage(), WIDTH, null);
         }
