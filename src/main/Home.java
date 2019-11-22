@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
@@ -328,9 +329,7 @@ Reports myreport = new Reports();
     }//GEN-LAST:event_Reports_jButtonActionPerformed
 
     private void Search_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_jButtonActionPerformed
-//CustomerSearch search = new CustomerSearch();
-//        Data_jPanel.setBackground(Color.red);
-//       jSplitPane1.setRightComponent( search);       
+
  try {
                  
  
@@ -342,7 +341,7 @@ Reports myreport = new Reports();
 
             Connection con = DBConn.myConn();
             
- PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner=?");
+ PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,salesman_name,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner=?");
  stmt.setString(1, id); 
 
             ResultSet rs = stmt.executeQuery();
@@ -377,7 +376,10 @@ Reports myreport = new Reports();
             
             
             rs.close();// Close ResultSet and Statement
-           jSplitPane1.setRightComponent(jtbl);
+                    jtbl.setPreferredScrollableViewportSize(jtbl.getPreferredSize());
+
+        JScrollPane scrollPane = new JScrollPane( jtbl);
+           jSplitPane1.setRightComponent(scrollPane);
             
         } catch (Exception ex) { 
             JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
