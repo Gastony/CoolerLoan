@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package main;
+import java.awt.Color;
 import java.awt.print.PrinterException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -184,7 +186,12 @@ try {
                 tm.addRow(a);
             }
             tm.fireTableDataChanged();
-            
+                                           DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+headerRenderer.setBackground(new Color(255, 0, 0));
+
+for (int i = 0; i < jTable1.getModel().getColumnCount(); i++) {
+        jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
             // Close ResultSet and Statement
             rs.close();
             
@@ -227,7 +234,12 @@ try {
                 tm.addRow(a);
             }
             tm.fireTableDataChanged();
-            
+                                           DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+headerRenderer.setBackground(new Color(255, 0, 0));
+
+for (int i = 0; i < jTable1.getModel().getColumnCount(); i++) {
+        jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
             // Close ResultSet and Statement
             rs.close();
             
@@ -246,20 +258,20 @@ try {
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet worksheet = workbook.createSheet("Customer Info");
             Row row1 = worksheet.createRow((short)0);
-            row1.createCell(0).setCellValue("Document No");
-            row1.createCell(1).setCellValue("Contract No");
-             row1.createCell(2).setCellValue("Outlet Name");
-              row1.createCell(3).setCellValue("Outlet Owner Name");
-               row1.createCell(4).setCellValue("Location/Area");
-                  row1.createCell(5).setCellValue("Street");
-            row1.createCell(6).setCellValue("To/Next to");
-             row1.createCell(7).setCellValue("Route Name");
-              row1.createCell(8).setCellValue("Empties");
-               row1.createCell(9).setCellValue("Order(twice cooler capacity)");
-                  row1.createCell(10).setCellValue("Salesman Name");
-            row1.createCell(11).setCellValue("Motivation");
-             row1.createCell(12).setCellValue("Approved by ASM");
-              row1.createCell(13).setCellValue("Approved by RSM");
+            row1.createCell(0).setCellValue("DOCUMENT NUMBER");
+            row1.createCell(1).setCellValue("CONTRACT NUMBER");
+             row1.createCell(2).setCellValue("OUTLET NAME");
+              row1.createCell(3).setCellValue("OUTLET OWNER NAME");
+               row1.createCell(4).setCellValue("LOCATION/AREA");
+                  row1.createCell(5).setCellValue("STREET");
+            row1.createCell(6).setCellValue("TO/NEXT TO");
+             row1.createCell(7).setCellValue("ROUTE NAME");
+              row1.createCell(8).setCellValue("EMPTIES");
+               row1.createCell(9).setCellValue("ORDER(TWICE COOLER CAPACITY)");
+                  row1.createCell(10).setCellValue("SALESMAN NAME");
+            row1.createCell(11).setCellValue("MOTIVATION");
+             row1.createCell(12).setCellValue("APPROVED BY ASM");
+              row1.createCell(13).setCellValue("APPROVED BY RSM");
               
             Row row2 ;
             ResultSet rs = statement.executeQuery("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler");
@@ -288,7 +300,8 @@ try {
             rs.close();
             statement.close();
             con.close();
-            System.out.println("Export Success");
+             JOptionPane.showMessageDialog(null, "Records successful Exported");
+           
         }catch(SQLException ex){
             System.out.println(ex);
         }catch(IOException ioe){

@@ -5,12 +5,14 @@
  */
 package main;
 
+import java.awt.Color;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -56,7 +58,12 @@ public class Pending extends javax.swing.JPanel {
                 tm.addRow(a);
             }
             tm.fireTableDataChanged();
-            
+                                           DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+headerRenderer.setBackground(new Color(255, 0, 0));
+
+for (int i = 0; i < jTable1.getModel().getColumnCount(); i++) {
+        jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
             // Close ResultSet and Statement
             rs.close();
             

@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +17,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import net.proteanit.sql.DbUtils;
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 
 
 
@@ -337,6 +344,8 @@ Reports myreport = new Reports();
     
     JTable jtbl = new JTable();
     jtbl.setShowGrid(true);
+    
+     
     String id = Search_jTextField.getText();
 
             Connection con = DBConn.myConn();
@@ -378,6 +387,13 @@ Reports myreport = new Reports();
             
             rs.close();// Close ResultSet and Statement
                     jtbl.setPreferredScrollableViewportSize(jtbl.getPreferredSize());
+
+      DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+headerRenderer.setBackground(new Color(255, 0, 0));
+
+for (int i = 0; i < jtbl.getModel().getColumnCount(); i++) {
+        jtbl.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
 
         JScrollPane scrollPane = new JScrollPane( jtbl);
            jSplitPane1.setRightComponent(scrollPane);

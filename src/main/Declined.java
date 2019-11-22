@@ -5,12 +5,14 @@
  */
 package main;
 
+import java.awt.Color;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,6 +28,7 @@ public class Declined extends javax.swing.JPanel {
         initComponents();
          try {
               jTable1.setShowGrid(true);
+ 
             Connection con = DBConn.myConn();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT outlet_owner,outlet_id,next_to,sales_rep_id,request_date FROM loan_coooler where approved_by_asm =2 OR approved_by_rsm=2");
@@ -57,7 +60,12 @@ public class Declined extends javax.swing.JPanel {
                 tm.addRow(a);
             }
             tm.fireTableDataChanged();
-            
+                               DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+headerRenderer.setBackground(new Color(255, 0, 0));
+
+for (int i = 0; i < jTable1.getModel().getColumnCount(); i++) {
+        jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
             // Close ResultSet and Statement
             rs.close();
             
@@ -114,7 +122,8 @@ public class Declined extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
