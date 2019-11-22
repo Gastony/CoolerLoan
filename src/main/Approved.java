@@ -25,6 +25,7 @@ public class Approved extends javax.swing.JPanel {
     public Approved() {
         initComponents();
          try {
+             jTable1.setShowGrid(true);
             Connection con = DBConn.myConn();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT outlet_owner,outlet_id,next_to,sales_rep_id,request_date FROM loan_coooler where approved_by_asm =1 AND approved_by_rsm=1 AND approved_by_contlr=0");

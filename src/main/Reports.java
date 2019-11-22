@@ -152,7 +152,7 @@ public class Reports extends javax.swing.JPanel {
 
     private void customer_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customer_jButtonActionPerformed
 try {
-   
+    jTable1.setShowGrid(true);
             Connection con = DBConn.myConn();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler");
@@ -195,7 +195,7 @@ try {
 
     private void cooler_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cooler_jButtonActionPerformed
 try {
-   
+    jTable1.setShowGrid(true);
             Connection con = DBConn.myConn();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT cooler_id,cooler_serialno,cooler_description,Cooler_type_id FROM coolers ");
@@ -300,6 +300,7 @@ try {
  MessageFormat header = new MessageFormat("Print Report");
         MessageFormat footer = new MessageFormat("Page{0,number,integer}");
     try {
+         jTable1.setShowGrid(true);
         jTable1.print(JTable.PrintMode.FIT_WIDTH, header, footer);
     } 
     catch (java.awt.print.PrinterAbortException e) {

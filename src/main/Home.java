@@ -336,17 +336,18 @@ Reports myreport = new Reports();
 
     
     JTable jtbl = new JTable();
-    
+    jtbl.setShowGrid(true);
     String id = Search_jTextField.getText();
 
             Connection con = DBConn.myConn();
-            
- PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,salesman_name,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner=?");
+             //String[] columnNames = {"DOCUMENT NUMBER", "CONTRACT NUMBER","OUTLET NAME","LOCATION","STREET","SALESMAN","APPROVED BY ASM","APPROVED BY RSM"};
+ PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,outlet_number,location,salesman_name,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner=?");
  stmt.setString(1, id); 
 
             ResultSet rs = stmt.executeQuery();
             
             // get columns info
+           
             ResultSetMetaData rsmd = rs.getMetaData();
             int columnCount = rsmd.getColumnCount();
             

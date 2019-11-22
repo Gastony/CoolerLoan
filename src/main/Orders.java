@@ -25,7 +25,7 @@ public class Orders extends javax.swing.JPanel {
     public Orders() {
         initComponents();
        try {
-   
+    jTable1.setShowGrid(true);
             Connection con = DBConn.myConn();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler");
