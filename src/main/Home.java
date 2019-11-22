@@ -21,9 +21,13 @@ import javax.swing.table.JTableHeader;
 import net.proteanit.sql.DbUtils;
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 
 
@@ -44,15 +48,11 @@ public class Home extends javax.swing.JFrame {
     public Home() {
        
         initComponents();
-//         Orders order = new Orders();
-//        jSplitPane1.setRightComponent( order);//setBackground(new Color(0,0,0,0));
+
 
     }
     
-//     public String searchtext(){
-//             String str = Search_jTextField.getText(); 
-//             return str;
-//         }
+
     
 
     Home(CustomerSearch aThis) {
@@ -343,9 +343,10 @@ Reports myreport = new Reports();
 
     
     JTable jtbl = new JTable();
-    jtbl.setShowGrid(true);
     
-     
+    jtbl.setShowGrid(true);
+
+    
     String id = Search_jTextField.getText();
 
             Connection con = DBConn.myConn();
@@ -388,16 +389,84 @@ Reports myreport = new Reports();
             rs.close();// Close ResultSet and Statement
                     jtbl.setPreferredScrollableViewportSize(jtbl.getPreferredSize());
 
-      DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
-headerRenderer.setBackground(new Color(255, 0, 0));
 
-for (int i = 0; i < jtbl.getModel().getColumnCount(); i++) {
-        jtbl.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
-}
 
         JScrollPane scrollPane = new JScrollPane( jtbl);
            jSplitPane1.setRightComponent(scrollPane);
-            
+            Search_jTextField.setText("");
+               DefaultTableCellRenderer CellheaderRenderer = new DefaultTableCellRenderer();
+CellheaderRenderer.setBackground(new Color(255, 0, 0));
+
+for (int i = 0; i < jtbl.getModel().getColumnCount(); i++) {
+        jtbl.getColumnModel().getColumn(i).setHeaderRenderer(CellheaderRenderer);
+}
+//setting toolTip
+            JLabel headerRenderer = new DefaultTableCellRenderer();
+             JLabel headerRenderer2 = new DefaultTableCellRenderer();
+              JLabel headerRenderer3 = new DefaultTableCellRenderer();
+               JLabel headerRenderer4 = new DefaultTableCellRenderer();
+                JLabel headerRenderer5 = new DefaultTableCellRenderer();
+                     JLabel headerRenderer6 = new DefaultTableCellRenderer();
+                          JLabel headerRenderer7 = new DefaultTableCellRenderer();
+    String columnName = jtbl.getModel().getColumnName(0);
+    headerRenderer.setText(columnName);
+    headerRenderer.setToolTipText("Document Number");
+    TableColumnModel columnModel = jtbl.getColumnModel();
+    TableColumn documentColumn = columnModel.getColumn(0);
+    documentColumn.setHeaderRenderer((TableCellRenderer)headerRenderer);
+    headerRenderer.setBackground(Color.red);
+    
+    String columnName2 = jtbl.getModel().getColumnName(1);
+    headerRenderer2.setText(columnName2);
+    headerRenderer2.setToolTipText("Contract Number");
+    TableColumnModel columnModel2 = jtbl.getColumnModel();
+    TableColumn contractColumn = columnModel2.getColumn(1);
+    contractColumn.setHeaderRenderer((TableCellRenderer)headerRenderer2);
+    headerRenderer2.setBackground(Color.red);
+    
+    String columnName3 = jtbl.getModel().getColumnName(2);
+    headerRenderer3.setText(columnName3);
+    headerRenderer3.setToolTipText("Outlet Name");
+    TableColumnModel columnModel3 = jtbl.getColumnModel();
+    TableColumn outletNameColumn = columnModel2.getColumn(2);
+    outletNameColumn.setHeaderRenderer((TableCellRenderer)headerRenderer3);
+    headerRenderer3.setBackground(Color.red);
+
+String columnName4 = jtbl.getModel().getColumnName(3);
+    headerRenderer4.setText(columnName4);
+    headerRenderer4.setToolTipText("Outlet Owner");
+    TableColumnModel columnModel4 = jtbl.getColumnModel();
+    TableColumn outletOwnerColumn = columnModel3.getColumn(3);
+    outletOwnerColumn.setHeaderRenderer((TableCellRenderer)headerRenderer4);
+    headerRenderer4.setBackground(Color.red);
+
+String columnName5 = jtbl.getModel().getColumnName(4);
+    headerRenderer5.setText(columnName5);
+    headerRenderer5.setToolTipText("Outlet Number");
+    TableColumnModel columnModel5 = jtbl.getColumnModel();
+    TableColumn outletNumberColumn = columnModel5.getColumn(4);
+    outletNumberColumn.setHeaderRenderer((TableCellRenderer)headerRenderer5);
+    headerRenderer5.setBackground(Color.red);
+    
+    String columnName6 = jtbl.getModel().getColumnName(5);
+    headerRenderer6.setText(columnName6);
+    headerRenderer6.setToolTipText("Location");
+    TableColumnModel columnModel6 = jtbl.getColumnModel();
+    TableColumn locationColumn = columnModel6.getColumn(5);
+    locationColumn.setHeaderRenderer((TableCellRenderer)headerRenderer6);
+    headerRenderer6.setBackground(Color.red);
+
+
+
+String columnName7 = jtbl.getModel().getColumnName(6);
+    headerRenderer7.setText(columnName7);
+    headerRenderer7.setToolTipText("Salesman Name");
+    TableColumnModel columnModel7 = jtbl.getColumnModel();
+    TableColumn salesManColumn = columnModel7.getColumn(6);
+    salesManColumn.setHeaderRenderer((TableCellRenderer)headerRenderer7);
+    headerRenderer7.setBackground(Color.red);
+    
+ //end setting toolTip
         } catch (Exception ex) { 
             JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
         }
