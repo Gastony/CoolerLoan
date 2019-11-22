@@ -157,7 +157,7 @@ try {
     jTable1.setShowGrid(true);
             Connection con = DBConn.myConn();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler");
+            ResultSet rs = stmt.executeQuery("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route,empties,order_no,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler");
             
             // get columns info
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -274,7 +274,7 @@ for (int i = 0; i < jTable1.getModel().getColumnCount(); i++) {
               row1.createCell(13).setCellValue("APPROVED BY RSM");
               
             Row row2 ;
-            ResultSet rs = statement.executeQuery("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler");
+            ResultSet rs = statement.executeQuery("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route,empties,order_no,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler");
             while(rs.next()){
                 int a = rs.getRow();
                 row2 = worksheet.createRow((short)a);
@@ -291,7 +291,7 @@ for (int i = 0; i < jTable1.getModel().getColumnCount(); i++) {
                 row2.createCell(10).setCellValue(rs.getString(11));
                 row2.createCell(11).setCellValue(rs.getString(12));
                 row2.createCell(12).setCellValue(rs.getString(13));
-                row2.createCell(13).setCellValue(rs.getString(14));
+               
                 
             }
             workbook.write(fileOut);

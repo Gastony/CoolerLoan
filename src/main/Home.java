@@ -351,7 +351,7 @@ Reports myreport = new Reports();
 
             Connection con = DBConn.myConn();
              //String[] columnNames = {"DOCUMENT NUMBER", "CONTRACT NUMBER","OUTLET NAME","LOCATION","STREET","SALESMAN","APPROVED BY ASM","APPROVED BY RSM"};
- PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,outlet_number,location,salesman_name,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner=?");
+ PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,outlet_no,location,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner=?");
  stmt.setString(1, id); 
 
             ResultSet rs = stmt.executeQuery();
