@@ -21,6 +21,7 @@ import javax.swing.table.JTableHeader;
 import net.proteanit.sql.DbUtils;
 import java.awt.Color;
 import java.awt.Component;
+import static javax.persistence.criteria.Predicate.BooleanOperator.AND;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
@@ -350,9 +351,11 @@ Reports myreport = new Reports();
     String id = Search_jTextField.getText();
 
             Connection con = DBConn.myConn();
-             //String[] columnNames = {"DOCUMENT NUMBER", "CONTRACT NUMBER","OUTLET NAME","LOCATION","STREET","SALESMAN","APPROVED BY ASM","APPROVED BY RSM"};
- PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,outlet_no,location,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner=?");
- stmt.setString(1, id); 
+  
+
+
+ PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,outlet_no,location,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner LIKE ?");
+ stmt.setString(1, "%" +id + "%"); 
 
             ResultSet rs = stmt.executeQuery();
             

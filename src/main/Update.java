@@ -285,18 +285,20 @@ JDialog.setDefaultLookAndFeelDecorated(true);
 String value6=Serial_jTextField.getText();
         String str= CustomerName_jTextField.getText();
             Connection con = DBConn.myConn();
-            PreparedStatement stmt = con.prepareStatement("UPDATE loan_coooler SET outlet_tag=? ,outlet_number=? WHERE outlet_owner=?");
+            PreparedStatement stmt = con.prepareStatement("UPDATE loan_coooler SET outlet_tag=? ,outlet_no=?,cooler_type=? WHERE outlet_owner=?");
             stmt.setString(1, value1);
             stmt.setString(2, value2);
-            stmt.setString(3, str);
+            stmt.setString(3, value4);
+            stmt.setString(4, str);
+            
             int rs = stmt.executeUpdate();
             
- PreparedStatement stmt2 = con.prepareStatement("UPDATE coolers SET cooler_tag=? ,cooler_type=?,cooler_serialno=?,cooler_asset_number=? WHERE cooler_type_id = (SELECT cooler_type_id FROM loan_coooler WHERE outlet_owner=? )");
+ PreparedStatement stmt2 = con.prepareStatement("UPDATE coolers SET cooler_tag=? ,cooler_serialno=?,cooler_asset_number=?,is_rented =1 WHERE cooler_id = (SELECT ln_col_id FROM loan_coooler WHERE outlet_owner=? )");
             stmt2.setString(1, value3);
-            stmt2.setString(2, value4);
+            
+stmt2.setString(2, value6);
 stmt2.setString(3, value5);
-stmt2.setString(4, value6);
-stmt2.setString(5, str);
+stmt2.setString(4, str);
 PreparedStatement stmt3 = con.prepareStatement("UPDATE loan_coooler SET approved_by_contlr=1  WHERE  outlet_owner=? ");
 stmt3.setString(1, str);
    int rs3 = stmt3.executeUpdate();
@@ -325,22 +327,18 @@ Serial_jTextField.setText("");
     }//GEN-LAST:event_Update_jButtonActionPerformed
 
     private void Update_jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_jComboBoxActionPerformed
-    try {
- 
-            Connection con = DBConn.myConn();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT outlet_owner FROM loan_coooler");
-        while(rs.next()) { 
-        String customer = rs.getString("outlet_owner");
-       Update_jComboBox.addItem(customer);
-        
-        
-    }
-            rs.close();
-            
-        } catch (Exception ex) { 
-            JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
-        }        // TODO add your handling code here:
+    try{
+       Connection con = DBConn.myConn();
+      Statement st = con.createStatement();
+      String s = "select outlet_owner from loan_coooler";
+     ResultSet rs = st.executeQuery(s);
+        while(rs.next())
+        {
+            Update_jComboBox.addItem(rs.getString(1));
+        }
+    }catch(Exception e){
+        JOptionPane.showMessageDialog(null, "ERROR");
+    }     // TODO add your handling code here:
     }//GEN-LAST:event_Update_jComboBoxActionPerformed
 
 

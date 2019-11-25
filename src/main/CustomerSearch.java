@@ -6,11 +6,16 @@
 package main;
 
 import static java.awt.image.ImageObserver.WIDTH;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.text.MessageFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import main.Home;
 /**
@@ -24,51 +29,7 @@ public class CustomerSearch extends javax.swing.JPanel {
      */
     public CustomerSearch() {
         initComponents();
- try {
-                 
- //String str = new Home().searchtext(); 
-// System.out.println(str);
-            Connection con = DBConn.myConn();
-            
- PreparedStatement stmt = con.prepareStatement("SELECT doc_no,contract_no,outlet_name,outlet_owner,location,street,next_to,route_name,empties,orders,salesman_name,recomendations,approved_by_asm,approved_by_rsm FROM loan_coooler WHERE outlet_owner=?");
- //stmt.setString(1, str); 
 
-            ResultSet rs = stmt.executeQuery();
-            
-            // get columns info
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnCount = rsmd.getColumnCount();
-            
-            // for changing column and row model
-            DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
-            
-            // clear existing columns 
-            tm.setColumnCount(0);
-            
-            // add specified columns to table
-            for (int i = 1; i <= columnCount; i++ ) {
-                tm.addColumn(rsmd.getColumnName(i));
-            }               
-                
-            // clear existing rows
-            tm.setRowCount(0);
-            
-            // add rows to table
-            while (rs.next()) {
-                String[] a = new String[columnCount];
-                for(int i = 0; i < columnCount; i++) {
-                    a[i] = rs.getString(i+1);
-                }
-                tm.addRow(a);
-            }
-            tm.fireTableDataChanged();
-            
-            // Close ResultSet and Statement
-            rs.close();
-            
-        } catch (Exception ex) { 
-            JOptionPane.showMessageDialog(this, ex, ex.getMessage(), WIDTH, null);
-        }
      
     }
 
@@ -102,9 +63,9 @@ public class CustomerSearch extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 22, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
