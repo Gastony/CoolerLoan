@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.PrintJob;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.awt.print.PageFormat;
 import java.awt.print.Paper;
@@ -31,7 +32,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author RTM
  */
-public class Declined extends javax.swing.JPanel {
+public class Declined extends javax.swing.JPanel implements
+        Printable {
 
     /**
      * Creates new form NewJPanel
@@ -156,4 +158,9 @@ for (int i = 0; i < jTable1.getModel().getColumnCount(); i++) {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public int print(Graphics grphcs, PageFormat pf, int i) throws PrinterException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

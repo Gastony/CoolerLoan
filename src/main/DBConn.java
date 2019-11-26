@@ -31,6 +31,10 @@ public class DBConn {
 String databaseURL = "jdbc:mysql://remotemysql.com/tgTI7MFQCi";
         String user = "tgTI7MFQCi";
         String password = "oXdMgUf7YU";
+//String databaseURL = "jdbc:mysql://www.mytestdem.000webhostapp.com/id6640889_retrofit";
+//        String user = "id6640889_root";
+//        String password = "root123";
+
 
 
         Connection conn = null;
