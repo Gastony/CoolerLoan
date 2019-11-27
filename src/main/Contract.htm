@@ -1,25 +1,9 @@
 <html>
 <head>
    <title>Cooler Contract</title>
-<script>
-function printPage(id)
-{
-   var html="<html>";
-   html+= document.getElementById(id).innerHTML;
-
-   html+="</html>";
-
-   var printWin = window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status  =0');
-   printWin.document.write(html);
-   printWin.document.close();
-   printWin.focus();
-   printWin.print();
-   printWin.close();
-}
-</script>
+   <link rel = "stylesheet" type = "text/css" href = "Contract.css" />
 </head>
 <body>
-<input type="button" value="Print Contract" onclick="printPage('block2');"></input>
 <div id="block1">
 <table border="1" >
 </tr>
@@ -42,9 +26,13 @@ Baina ya COCA-COLA KWANZA LTD, S.L.P 7813 Dar es salaam(ambayo katika mkataba hu
 <p><b>MKATABA HUU UNASHUHUDIA YAFUATAYO:</b></p>
 <ol type="1">
 <li>	Kwamba Coca-Cola itamwazimisha mwazimaji mashine ya kupooza/mashine za kutoa huduma za biashara ya soda za Coca-Cola(ambazo katika mkataba huu zitatambulika kama "Jokofu") zenye maelezo yafuatayo:</li>
-<p>Idadi ya Jokofu/kifaa............</p>
-<p>Namba ya Jokofu........</p>
-<p>Aina ya Jokofu/kifaa.......</p>
+<p>Idadi ya Jokofu/kifaa: <input type="text" id="cooler_name" name="name" required
+       minlength="4" maxlength="8" size="10"></p>
+<p>Namba ya Jokofu:<input type="text" id="cooler_serial" name="name" required
+       minlength="4" maxlength="8" size="10"></p>
+<p>Aina ya Jokofu/kifaa:<input type="text" id="cooler_type" name="name" required
+       minlength="4" maxlength="8" size="10"></p>
+
 <li><b>Kwamba </b>mwazimaji atawajibika kutumia jokofu/mashine hizo kwa mujibu wa masharti yaliyoko katika mkatabua huu</li>
 </ol>
 <ol type="a">
@@ -101,8 +89,10 @@ Baina ya COCA-COLA KWANZA LTD, S.L.P 7813 Dar es salaam(ambayo katika mkataba hu
 <p>Cheo…..</p>
 </ol>
        
-<p>Imetiwa sahihi na………</p>
-<p>Kwa niaba ya …………….</p>
+<p>Imetiwa sahihi na <input type="text" id="customer_name" name="name" required
+       minlength="4" maxlength="8" size="10"></p>
+<p>Kwa niaba ya <input type="text" id="outlet_name" name="name" required
+       minlength="4" maxlength="8" size="10"></p>
 
 <p>Leo tarehe……………. Mwezi…………. Mwaka……….</p>
 <p>Mbele ya</p>
