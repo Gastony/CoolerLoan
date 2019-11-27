@@ -56,9 +56,7 @@ public class Home extends javax.swing.JFrame {
 
     
 
-    Home(CustomerSearch aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
    
     
 
@@ -326,9 +324,9 @@ Update update = new Update();
     }//GEN-LAST:event_Update_info_jButtonActionPerformed
 
     private void Contracts_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Contracts_jButtonActionPerformed
-      CustomerSearch myhtml = new CustomerSearch();
+      ContractClass mycontract = new ContractClass();
         Data_jPanel.setBackground(Color.red);
-       jSplitPane1.setRightComponent( myhtml);  // TODO add your handling code here:
+       jSplitPane1.setRightComponent( mycontract);  // TODO add your handling code here:
     }//GEN-LAST:event_Contracts_jButtonActionPerformed
 
     private void Reports_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reports_jButtonActionPerformed

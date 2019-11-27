@@ -5,42 +5,20 @@
  */
 package main;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import static java.awt.image.ImageObserver.WIDTH;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.text.MessageFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
-import javafx.scene.web.WebView;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextPane;
-import javax.swing.table.DefaultTableModel;
-import main.Home;
 /**
  *
  * @author RTM
  */
-public class CustomerSearch extends javax.swing.JPanel {
+public class ContractClass extends javax.swing.JPanel {
 
     /**
      * Creates new form CustomerSearch
      */
-    public CustomerSearch() {
+    public ContractClass() {
         initComponents();
 
 JTextPane tp = new JTextPane();
@@ -55,7 +33,7 @@ JTextPane tp = new JTextPane();
   try {
     //URL url = new URL("SwingTester.htm");
     //URL url = getClass().getResource("SwingTester.htm");
-     URL url = SwingTester.class.getResource("SwingTester.htm");
+     URL url = Contract.class.getResource("Contract.htm");
     tp.setPage(url);
     } 
   catch (Exception e) {
